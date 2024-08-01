@@ -6,8 +6,9 @@ from torch_geometric.utils import k_hop_subgraph
 from finrl.meta.env_portfolio_optimization.env_portfolio_optimization import PortfolioOptimizationEnv
 from finrl.agents.portfolio_optimization.models import DRLAgent
 from finrl.agents.portfolio_optimization.architectures import GPM
+import time
 
-def test():
+def test(initial_amount=10000):
     device = 'cuda:0' if torch.cuda.is_available() else 'cpu'
 
     nasdaq_temporal = pd.read_csv("Temporal_Relational_Stock_Ranking_FinRL/temporal_data/NASDAQ_temporal_data.csv")
@@ -43,10 +44,10 @@ def test():
 
     df_portfolio = nasdaq_temporal[["day", "tic", "close", "high", "low"]]
     df_portfolio_train = df_portfolio[df_portfolio["day"] < 979]
-    df_portfolio_test = df_portfolio[df_portfolio["day"] >= 979]
+    df_portfolio_test = df_portfolio[df_portfolio["day"] >= 1000]
     environment_train = PortfolioOptimizationEnv(
             df_portfolio_train,
-            initial_amount=100000,
+            initial_amount=initial_amount,
             comission_fee_pct=0.0025,
             time_window=50,
             features=["close", "high", "low"],
@@ -56,7 +57,7 @@ def test():
         )
     environment_test = PortfolioOptimizationEnv(
                 df_portfolio_test,
-                initial_amount=100000,
+                initial_amount=initial_amount,
                 comission_fee_pct=0.0025,
                 time_window=50,
                 features=["close", "high", "low"],
@@ -107,15 +108,20 @@ def test():
     UBAH_results["test"] = environment_test._asset_memory["final"]
 
 
-    plt.plot(UBAH_results["test"], label="Buy and Hold")
-    plt.plot(GPM_results["test"], label="GPM")
+    fig, ax = plt.subplots()
+    ax.plot(UBAH_results["test"], label="Buy and Hold")
+    ax.plot(GPM_results["test"], label="GPM")
 
-    plt.xlabel("Days")
-    plt.ylabel("Portfolio Value")
-    plt.title("Performance in testing period")
-    plt.legend()
+    ax.set_xlabel("Days")
+    ax.set_ylabel("Portfolio Value")
+    ax.set_title("Portfolio value evolution")
+    ax.legend()
 
-    plt.savefig('plots/result_GPM.jpg')
+    fig.savefig('plots/result_GPM.jpg')
+    return fig
 
 if __name__ == '__main__':
+    start_time = time.time()
     test()
+    duration = time.time()-start_time
+    print(duration)
