@@ -44,7 +44,7 @@ def test(initial_amount=10000):
 
     df_portfolio = nasdaq_temporal[["day", "tic", "close", "high", "low"]]
     df_portfolio_train = df_portfolio[df_portfolio["day"] < 979]
-    df_portfolio_test = df_portfolio[df_portfolio["day"] >= 1000]
+    df_portfolio_test = df_portfolio[df_portfolio["day"] >= 1180]
     environment_train = PortfolioOptimizationEnv(
             df_portfolio_train,
             initial_amount=initial_amount,
@@ -79,8 +79,8 @@ def test(initial_amount=10000):
     }
     model = DRLAgent(environment_train).get_model("pg", device, model_kwargs, policy_kwargs)
 
-    GPM_results = {
-        "test": {},
+    GPM_test = {
+        "values": {},
     }
 
     # instantiate an architecture with the same arguments used in training
@@ -90,11 +90,15 @@ def test(initial_amount=10000):
 
     # testing
     DRLAgent.DRL_validation(model, environment_test, policy=policy)
-    GPM_results["test"] = environment_test._asset_memory["final"]
+    GPM_test["values"] = environment_test._asset_memory["final"]
+    #GPM_test["days"] = df_portfolio_test['day']
+
+    portfolio_weights = environment_test._final_weights
+    asset_memory = environment_test._asset_memory['final']
 
 
-    UBAH_results = {
-        "test": {},
+    UBAH_test = {
+        "values": {},
     }
 
     PORTFOLIO_SIZE = len(tics_in_portfolio)
@@ -105,23 +109,13 @@ def test(initial_amount=10000):
     while not terminated:
         action = [0] + [1/PORTFOLIO_SIZE] * PORTFOLIO_SIZE
         _, _, terminated, _ = environment_test.step(action)
-    UBAH_results["test"] = environment_test._asset_memory["final"]
+    UBAH_test["values"] = environment_test._asset_memory["final"]
+    #UBAH_test["days"] = df_portfolio_test['day']
 
-
-    fig, ax = plt.subplots()
-    ax.plot(UBAH_results["test"], label="Buy and Hold")
-    ax.plot(GPM_results["test"], label="GPM")
-
-    ax.set_xlabel("Days")
-    ax.set_ylabel("Portfolio Value")
-    ax.set_title("Portfolio value evolution")
-    ax.legend()
-
-    #fig.savefig('plots/result_GPM.jpg')
-    return fig
+    return GPM_test, UBAH_test, portfolio_weights, asset_memory
 
 if __name__ == '__main__':
     start_time = time.time()
     test()
     duration = time.time()-start_time
-    print(duration)
+    print("test duration", duration)
