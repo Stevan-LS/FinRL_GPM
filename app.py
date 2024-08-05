@@ -1,7 +1,5 @@
 import streamlit as st
 from test import test
-from PIL import Image
-import plotly.tools as tls
 
 def predict(initial_amount, num_weeks):
     #return f"Prediction for {num_weeks} week(s)"
@@ -15,8 +13,8 @@ def main():
     
     if st.button("Test"):
         graph = predict(initial_amount, num_weeks)
-        plotly_fig = tls.mpl_to_plotly(graph)
-        st.pyplot(plotly_fig)
+        #plotly_fig = tls.mpl_to_plotly(graph)
+        st.pyplot(graph)
 
 if __name__ == "__main__":
     main()

@@ -117,7 +117,7 @@ def test(initial_amount=10000):
     ax.set_title("Portfolio value evolution")
     ax.legend()
 
-    fig.savefig('plots/result_GPM.jpg')
+    #fig.savefig('plots/result_GPM.jpg')
     return fig
 
 if __name__ == '__main__':
