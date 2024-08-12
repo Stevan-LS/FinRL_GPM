@@ -8,7 +8,7 @@ from finrl.agents.portfolio_optimization.models import DRLAgent
 from finrl.agents.portfolio_optimization.architectures import GPM
 import time
 
-def test(initial_amount=10000):
+def test(selected_stocks, initial_amount=10000):
     device = 'cuda:0' if torch.cuda.is_available() else 'cpu'
 
     nasdaq_temporal = pd.read_csv("Temporal_Relational_Stock_Ranking_FinRL/temporal_data/NASDAQ_temporal_data.csv")
@@ -16,7 +16,7 @@ def test(initial_amount=10000):
     nasdaq_edge_type = np.load("Temporal_Relational_Stock_Ranking_FinRL/relational_data/edge_types/NASDAQ_sector_industry_edge_type.npy")
 
     list_of_stocks = nasdaq_temporal["tic"].unique().tolist()
-    tics_in_portfolio = ["AAPL", "CMCSA", "CSCO", "FB", "HBAN", "INTC", "MSFT", "MU", "NVDA", "QQQ", "XIV"]
+    tics_in_portfolio = selected_stocks # ["AAPL", "CMCSA", "CSCO", "FB", "HBAN", "INTC", "MSFT", "MU", "NVDA", "QQQ", "XIV"]
 
     portfolio_nodes = []
     for tic in tics_in_portfolio:
