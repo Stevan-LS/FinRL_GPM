@@ -11,7 +11,7 @@ def process(selected_stocks, initial_amount):
 
     # Build portfolio compositon evolution
     portfolio_distribution = [portfolio_weights[i] * asset_memory[i] for i in range(len(asset_memory))]
-    portfolio_names = ["Cash", "AAPL", "CMCSA", "CSCO", "FB", "HBAN", "INTC", "MSFT", "MU", "NVDA", "QQQ", "XIV"]
+    portfolio_names = ["Cash"] + selected_stocks
     money_threshold = 1 #threshold of money of the stocks displayed
     portfolio_evolution = []
     for distrib in portfolio_distribution:
@@ -146,13 +146,13 @@ def main():
                     
                     # Display bought stocks
                     if not bought_df.empty:
-                        st.markdown("**Bought Stocks:**")
+                        st.markdown("**Bought stocks:**")
                         bought_df = bought_df[bought_df['Stock'] != 'Cash'][['Stock', 'Amount ($)']].style.format({"Change ($)": "{:.2f}"})
                         st.dataframe(bought_df, hide_index=True)
                     
                     # Display sold stocks
                     if not sold_df.empty:
-                        st.markdown("**Sold Stocks:**")
+                        st.markdown("**Sold stocks:**")
                         sold_df = sold_df[sold_df['Stock'] != 'Cash'][['Stock', 'Amount ($)']].style.format({"Change ($)": "{:.2f}"})
                         st.dataframe(sold_df, hide_index=True)
 
