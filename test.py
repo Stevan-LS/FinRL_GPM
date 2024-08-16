@@ -45,6 +45,7 @@ def test(selected_stocks, initial_amount=10000):
     df_portfolio = nasdaq_temporal[["day", "tic", "close", "high", "low"]]
     df_portfolio_train = df_portfolio[df_portfolio["day"] < 979]
     df_portfolio_test = df_portfolio[df_portfolio["day"] >= 1180]
+
     environment_train = PortfolioOptimizationEnv(
             df_portfolio_train,
             initial_amount=initial_amount,
@@ -86,7 +87,7 @@ def test(selected_stocks, initial_amount=10000):
     # instantiate an architecture with the same arguments used in training
     # and load with load_state_dict.
     policy = GPM(new_edge_index, new_edge_type, nodes_to_select, device=device)
-    policy.load_state_dict(torch.load("policy_GPM.pt"))
+    policy.load_state_dict(torch.load("policy_GPM.pt", map_location=torch.device(device)))
 
     # testing
     DRLAgent.DRL_validation(model, environment_test, policy=policy)
