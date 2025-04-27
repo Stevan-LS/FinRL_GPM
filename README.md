@@ -67,3 +67,5 @@ This project is available for educational and research purposes.
 ## Acknowledgments
 
 This project builds upon the FinRL framework and incorporates Generalized Policy Mirroring techniques for enhanced performance.
+
+Stevan Le Stanc
