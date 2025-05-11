@@ -2,70 +2,98 @@
 
 ![Portfolio Performance](plots/result_GPM.jpg)
 
-## Overview
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
+[![Python](https://img.shields.io/badge/Python-3.8%2B-blue.svg)](https://www.python.org/downloads/)
 
-FinRL_GPM is an AI-driven investment portfolio manager that uses Generalized Policy Mirroring (GPM) reinforcement learning techniques to optimize portfolio allocation across multiple assets. The model learns optimal investment strategies by interacting with financial market environments and adapting its decision-making process to maximize returns while managing risk.
+---
 
-## Key Features
+## 🚀 Overview
 
-- **Reinforcement Learning Framework**: Uses FinRL (Financial Reinforcement Learning) to train investment policies
-- **Generalized Policy Mirroring**: Implements GPM algorithm for improved policy optimization
-- **Portfolio Optimization**: Automatically allocates investments across different assets
-- **Performance Evaluation**: Includes tools to evaluate and visualize model performance
+**FinRL_GPM** is an AI-driven investment portfolio manager leveraging Generalized Policy Mirroring (GPM) reinforcement learning to optimize portfolio allocation across multiple assets. The model learns optimal investment strategies by interacting with financial market environments, aiming to maximize returns while managing risk.
 
-## Results
+---
 
-The trained model demonstrates significant portfolio growth compared to baseline strategies:
+## ✨ Key Features
 
-## Project Structure
+- **Reinforcement Learning Framework**: Built on the FinRL (Financial Reinforcement Learning) library
+- **Generalized Policy Mirroring**: Implements the GPM algorithm for robust policy optimization
+- **Portfolio Optimization**: Dynamically allocates investments across diverse assets
+- **Performance Evaluation**: Tools for comprehensive evaluation and visualization of model performance
+- **Jupyter Demo**: Interactive notebook for hands-on experimentation
 
-- `train.py`: Main script for training the reinforcement learning model
-- `app.py`: Application interface for using the trained model
-- `dataProcessing.py`: Handles financial data preprocessing
-- `FinRL_GPM_Demo.ipynb`: Jupyter notebook demonstrating the model's capabilities
-- `policy_GPM.pt`: Pre-trained policy model weights
-- `plots/`: Directory containing performance visualization results
+---
 
-## Getting Started
+## 📊 Results
 
-### Prerequisites
+The trained model demonstrates significant portfolio growth compared to baseline strategies. See the plot above and the `plots/` directory for detailed results.
 
-Install the required packages:
+---
 
-```bash
-pip install -r requirements.txt
-```
+## 📁 Project Structure
+
+- `train.py` — Main script for training the reinforcement learning model
+- `app.py` — Application interface for using the trained model
+- `app_test.py` — Script for evaluating model performance
+- `dataProcessing.py` — Handles financial data preprocessing
+- `FinRL_GPM_Demo.ipynb` — Jupyter notebook demonstrating the model's capabilities
+- `policy_GPM.pt` — Pre-trained policy model weights
+- `plots/` — Directory containing performance visualization results
+
+---
+
+## 🛠️ Installation
+
+1. **Clone the repository:**
+   ```bash
+   git clone https://github.com/yourusername/FinRL_GPM.git
+   cd FinRL_GPM
+   ```
+2. **Install dependencies:**
+   ```bash
+   pip install -r requirements.txt
+   ```
+
+---
+
+## 🚦 Usage
 
 ### Training a Model
-
-To train a new model:
-
+To train a new model from scratch:
 ```bash
 python train.py
 ```
 
-### Testing Performance
-
-To evaluate model performance:
-
+### Evaluating Model Performance
+To evaluate the trained model:
 ```bash
 python app_test.py
 ```
 
-### Demo
+### Running the Application
+To use the trained model interactively:
+```bash
+python app.py
+```
 
-For a comprehensive demonstration of the model's capabilities, see the `FinRL_GPM_Demo.ipynb` notebook.
+### Demo Notebook
+For a comprehensive demonstration, open the Jupyter notebook:
+```bash
+jupyter notebook FinRL_GPM_Demo.ipynb
+```
 
-## Technical Approach
+---
 
-This project combines financial market data analysis with deep reinforcement learning techniques. The agent learns to make investment decisions by balancing risk and reward across multiple market conditions. The Generalized Policy Mirroring approach enhances traditional reinforcement learning by improving policy convergence and stability.
+## 🧠 Technical Approach
 
-## License
+This project combines financial market data analysis with deep reinforcement learning. The agent learns to make investment decisions by balancing risk and reward across multiple market conditions. The Generalized Policy Mirroring approach enhances traditional RL by improving policy convergence and stability.
 
-This project is available for educational and research purposes.
+---
 
-## Acknowledgments
+## 🙏 Acknowledgments
 
-This project builds upon the FinRL framework and incorporates Generalized Policy Mirroring techniques for enhanced performance.
+- Built upon the [FinRL](https://github.com/AI4Finance-Foundation/FinRL) framework
+- Incorporates Generalized Policy Mirroring techniques for enhanced performance
 
-Stevan Le Stanc
+---
+
+**Stevan Le Stanc**
